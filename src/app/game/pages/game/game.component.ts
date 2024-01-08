@@ -3,6 +3,7 @@ import { getRandomItem } from 'src/app/helpers/random.helper';
 import { Pokemon } from '../../interfaces/pokemon.interface';
 import { PlayerService } from '../../services/player.service';
 import { PokemonService } from '../../services/pokemon.service';
+import { UsuariService } from "../../../usuari.service";
 
 @Component({
   selector: 'app-game',
@@ -17,10 +18,11 @@ export class GameComponent implements OnInit {
   private _pokemons: Pokemon[] = [];
   private _pokemon!: Pokemon;
 
+  jugador:string | null = this.usuariService.jugador
   get score(): number {
     return this.playerService.score;
   }
-  
+
   get hearts(): Array<any> {
     return Array(this.playerService.lifes);
   }
@@ -48,13 +50,14 @@ export class GameComponent implements OnInit {
 
   constructor(
     private playerService: PlayerService,
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    public usuariService: UsuariService
   ) { }
 
   ngOnInit(): void {
     this.playerService.resetGame();
     this.newGame();
-  }
+    }
 
   onSelect(pokemonName: string) {
     this._pokemonSelected = pokemonName;
@@ -68,7 +71,6 @@ export class GameComponent implements OnInit {
       this.playerService.decreaseLifes();
       console.log('incorrect');
     }
-    
   }
 
   // this function es execute every time that user click in next game
@@ -89,4 +91,6 @@ export class GameComponent implements OnInit {
     }
   }
 
+
+  protected readonly localStorage = localStorage;
 }
