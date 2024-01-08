@@ -1,0 +1,18 @@
+<div fxLayout="column"
+     fxLayoutAlign="space-between center">
+<form #myForm="ngForm" (ngSubmit)="onSubmit()">
+  <section>
+    <div class='formulari'>
+
+      <label>JUGADOR:</label>
+      <input [(ngModel)]="jugador" name="Jugador" placeholder="Introdueix el nom del Jugador" type='email' required>
+      <button mat-raised-button
+              color="primary"
+              routerLink="/home"
+              class="breath">
+        JUGAR
+      </button>
+    </div>
+  </section>
+</form>
+</div>
